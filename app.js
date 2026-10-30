@@ -60,3 +60,9 @@ const imageDialog=$('#image-dialog');$$('[data-expand]').forEach(b=>b.addEventLi
 $$('[role=tablist]').forEach(list=>list.addEventListener('keydown',e=>{if(!['ArrowRight','ArrowLeft','Home','End','ArrowDown','ArrowUp'].includes(e.key))return;const tabs=$$('[role=tab]',list),i=tabs.indexOf(document.activeElement);if(i<0)return;e.preventDefault();let n=e.key==='Home'?0:e.key==='End'?tabs.length-1:(i+(['ArrowRight','ArrowDown'].includes(e.key)?1:-1)+tabs.length)%tabs.length;tabs[n].focus();tabs[n].click();}));
 $$('[data-whatsapp]').forEach(a=>a.href='https://wa.me/5511953525141?text='+encodeURIComponent(a.dataset.whatsapp));
 $('#year').textContent=new Date().getFullYear();
+
+(function(){const h=document.querySelector('.hero h1');if(!h)return;
+function fit(){h.style.fontSize='';if(!matchMedia('(max-width:800px)').matches)return;
+for(let i=0;i<3;i++){h.style.display='block';const avail=h.getBoundingClientRect().width;h.style.display='inline-block';h.style.maxWidth='none';const need=h.getBoundingClientRect().width;h.style.display='';h.style.maxWidth='';
+if(!avail||!need)return;const cur=parseFloat(getComputedStyle(h).fontSize);h.style.fontSize=Math.max(30,Math.min(68,cur*avail/need*0.985))+'px';}}
+fit();addEventListener('resize',fit);addEventListener('orientationchange',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);})();
